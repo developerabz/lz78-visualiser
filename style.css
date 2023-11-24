@@ -1,0 +1,19 @@
+.grey {
+  background-color: grey;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  gap: 5px;
+  width: 25vw;
+}
+
+.card {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+}
