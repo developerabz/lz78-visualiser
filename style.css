@@ -1,3 +1,6 @@
+h1 {
+  text-align: center;
+}
 .grey {
   background-color: grey;
 }
@@ -8,6 +11,7 @@
   border: 1px solid black;
   gap: 5px;
   width: 25vw;
+  padding: 5px;
 }
 
 .card {
