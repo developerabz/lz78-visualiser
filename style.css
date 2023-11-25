@@ -1,23 +1,104 @@
 h1 {
   text-align: center;
 }
-.grey {
-  background-color: grey;
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  background-color: rgb(255, 166, 50);
+  color: black;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 700px);
+  gap: 5px;
+
+}
+section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+button {
+  padding: 5px;
+  border-radius: 8px;
+  background-color: rgb(255, 166, 50);
+}
+
+button:hover {
+  background-color: rgb(255, 145, 0);
+}
+
+textarea {
+  background-color: rgb(255, 166, 50);
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  border: 5px solid rgb(255, 145, 0);
   gap: 5px;
-  width: 25vw;
-  padding: 5px;
+}
+
+@media (30em <= width) {
+  .list {
+    width: 85vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 10px;
+  }
+  .grid {
+    border: 1px solid black;
+  }
+
+
+}
+
+
+@media (50em <= width) {
+  .list {
+    width: 85vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 10px;
+  }
+  .grid {
+    border: 1px solid black;
+  }
+
+
+}
+
+@media (100em <= width) {
+  .list {
+    width: 85vw;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 10px;
+  }
+  .grid {
+    border: 1px solid black;
+  }
+
+
 }
 
 .card {
   display: flex;
 }
 
+.card:nth-of-type(odd) {
+  background-color: rgb(255, 145, 0);
+}
+
 .col {
   flex: 1;
+  text-align: center;
+
 }

@@ -1,7 +1,10 @@
 // console.log(letters)
 const body = document.querySelector('body')
 
-const button = document.querySelector('button');
+const defaultButton = document.querySelector('.default');
+const clearButton = document.querySelector('.clear');
+
+const visualiseButton = document.querySelector('.visualise');
 
 
 const removeElement = (identifier) => {
@@ -55,7 +58,11 @@ const calcReduction = (orginalAmount, newAmount) => {
 
 const addInfoToBody = (root, visual) => {
   const p = document.createElement('p');
-  p.textContent = `The original text required ${root.value.length} characters. After compression it requires only ${visual.length} characters. A reduction of approximately ${calcReduction(root.value.length, visual.length)}%.`
+  if (root.value.length === 0) {
+    p.textContent = 'Please type more characters to see the visualisation in action.'
+  } else {
+    p.textContent = `The original text required ${root.value.length} characters. After compression it requires only ${visual.length} characters. A reduction of approximately ${calcReduction(root.value.length, visual.length)}%.`
+  }
   body.append(p)
   // console.log(visual)
   const list = document.createElement('div');
@@ -74,8 +81,10 @@ const addInfoToBody = (root, visual) => {
   codeTitle.classList.add('col')
   
   cardTitle.append(indexTitle, outputTitle, codeTitle)
-  list.append(cardTitle)
-  visual.forEach(v => {
+  let grid = document.createElement('div');
+  grid.classList.add('grid')
+  grid.append(cardTitle)
+  visual.forEach((v, i) => {
     const card = document.createElement('div')
     card.classList.add('card')
     const index = document.createElement('span')
@@ -91,8 +100,16 @@ const addInfoToBody = (root, visual) => {
     code.classList.add('col')
   
     card.append(index, output, code)
-    list.append(card)
+    grid.append(card)
+    if (grid.childNodes.length === 10) {
+      list.append(grid);
+      grid = document.createElement('div');
+      grid.classList.add('grid')
+    }
   })
+  if (grid.childNodes.length !== 10) {
+    list.append(grid)
+  }
   body.append(list)
 }
 
@@ -114,4 +131,41 @@ const produceVisualisation = () => {
 
 }
 
-button.addEventListener('click', produceVisualisation)
+visualiseButton.addEventListener('click', produceVisualisation)
+
+const updatedTextValue = (type) => {
+  const main = document.querySelector('main')
+  const root = document.getElementById('root');
+  const buttonSection = document.querySelector('section');
+  const updatedRoot = root.cloneNode();
+  switch (type) {
+    case 'clear':
+      updatedRoot.value = ''
+      break;
+    case 'default':
+      updatedRoot.value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      break;
+    default:
+      console.error("Type not found", type)
+      break;
+  }
+  main.removeChild(root);
+  main.removeChild(buttonSection);
+  body.removeChild(main)
+  removeExistingElements()
+  main.append(updatedRoot)
+  main.append(buttonSection)
+  body.append(main)
+}
+
+const clearText = () => {
+  updatedTextValue('clear')
+}
+
+clearButton.addEventListener('click', clearText)
+
+const setToDefaultText = () => {
+  updatedTextValue('default')
+}
+
+defaultButton.addEventListener('click', setToDefaultText)
