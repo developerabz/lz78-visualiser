@@ -37,7 +37,8 @@ const runLz78Algo = (letters, visual) => {
           return char === letters[i + index]
         })
         if (completeMatch) {
-          const outputStr = letters[i + m.code.length] || 'Text End'
+
+          const outputStr = letters[i + m.code.length] || 'END'
           visual.push({
             index: visual.length,
             output: `(${m.index}, ${outputStr})`,
@@ -120,11 +121,7 @@ const produceVisualisation = () => {
   const root = document.getElementById('root')
   const letters = [...root.value]
 
-  const visual = [{
-    index: 0,
-    output: `(${0}, '')`,
-    code: ''
-  }]
+  const visual = []
   runLz78Algo(letters, visual);
 
   addInfoToBody(root, visual)
