@@ -70,7 +70,6 @@ To run this project locally:
 - HTML5
 - CSS3
 - JavaScript
-- Modern Web APIs
 
 ## Contributing
 
